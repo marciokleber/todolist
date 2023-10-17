@@ -1,13 +1,10 @@
 package br.com.marciokleber.todolist.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
-import org.yaml.snakeyaml.events.Event;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.UUID;
+import java.time.LocalDateTime;
 
 @Data
 @Entity(name = "USER")
@@ -15,7 +12,17 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String userName;
+
+    @Column(name = "USERNAME", unique = true)
+    private String username;
+
+    @Column(name = "NAME")
     private String name;
+
+    @Column(name = "PASSWORD")
     private String password;
+
+    @CreationTimestamp
+    @Column(name = "CREATED_AT")
+    private LocalDateTime createdAt;
 }
